@@ -29,7 +29,8 @@ window.addEventListener('DOMContentLoaded', function(){
 
                 if (timeRemaining <= 0){
                     stopTimer();
-                    return { hours : 0, minutes : 0, seconds : 0, day : 0} 
+                    addTimeRemaining();
+                    // return { hours : 0, minutes : 0, seconds : 0, day : 0 } // первый урок
                 }
                 
                 return {
@@ -39,6 +40,13 @@ window.addEventListener('DOMContentLoaded', function(){
                     seconds,     //в старом стандарте 'seconds':seconds
                     timeRemaining
                 }
+            }
+            // добавим еще 24 часа на акцию
+            let addTimeRemaining = () =>{
+                let addDays = 1;
+                let date = new Date()
+                date.setDate(date.getDate() + addDays);
+                countTimer(date);
             }
             let stopTimer = () => {
                 clearInterval(setTimer);
@@ -55,6 +63,7 @@ window.addEventListener('DOMContentLoaded', function(){
                     timerMinutes.textContent = declOfNum(timer.minutes,['минута','минуты','минут']);
                 (timer.seconds !== 0) ? timerSeconds.textContent = addNull(timer.seconds) : 
                 timerSeconds.textContent = declOfNum(timer.seconds,['секунад','секунды','секунд']);
+
               
             }
             let setTimer = setInterval(() => {
@@ -64,7 +73,7 @@ window.addEventListener('DOMContentLoaded', function(){
            
     }
 
-    countTimer('19 feb 2020 21:04');
+    countTimer('17 feb 2020 23:18');
 
     
     

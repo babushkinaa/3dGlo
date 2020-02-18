@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 hours = Math.floor((timeRemaining / 60 )/ 60),
                 day = Math.floor(timeRemaining / 60 / 60 / 24);
 
-                if (timeRemaining <= 0){
+                if (timeRemaining <= 1){
                     stopTimer();
                     addTimeRemaining();
                     // return { hours : 0, minutes : 0, seconds : 0, day : 0 } // первый урок
@@ -73,7 +73,7 @@ window.addEventListener('DOMContentLoaded', function(){
            
     }
 
-    countTimer('17 feb 2020 23:18');
+    countTimer('18 feb 2020 13:52');
 
     
     

@@ -5,6 +5,7 @@ const start = document.querySelector('.start');
 const stop = document.querySelector('.stop');
 const reset = document.querySelector('.reset');
 let rAf;
+let perfomance;
 
 // box1.style.left
 let box1Left = box1.offsetLeft + 2;
@@ -30,6 +31,9 @@ const moveBox1 = move1px(box1);
 function callback() {
   moveBox1();
   rAf = requestAnimationFrame(callback);
+//   perfomance = perfomance.now();
+  console.log('perfomance: ', perfomance);
+  console.dir(rAf);
   start.removeEventListener('click',callback);
   start.addEventListener('click',stopCallback);
   start.textContent = 'остановить';

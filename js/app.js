@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 hours = Math.floor((timeRemaining / 60 )/ 60),
                 day = Math.floor(timeRemaining / 60 / 60 / 24);
 
-                if (timeRemaining <= 1){
+                if (timeRemaining <= 0){
                     stopTimer();
                     addTimeRemaining();
                     return { hours : 0, minutes : 0, seconds : 0, day : 0 } // первый урок
@@ -45,9 +45,9 @@ window.addEventListener('DOMContentLoaded', function(){
             let addTimeRemaining = () =>{
                 let addDays = 1;
                 let date = new Date()
-                // let dateHours = 24 - date.getHours(); 
                 date.setHours(date.getHours() + (24 - date.getHours()));
-                date.setMinutes(60 - date.getMinutes());
+                date.setMinutes('00');
+                date.setSeconds(date.getSeconds());
                 countTimer(date);
             }
             let stopTimer = () => {

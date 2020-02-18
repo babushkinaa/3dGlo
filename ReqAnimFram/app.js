@@ -53,6 +53,7 @@ start.addEventListener('click',callback);
 reset.addEventListener('click',()=>{
     box1.style.left = box1Left + 'px';
     box1.style.top = box1Top + 'px';
+    rAf = 0;
     start.textContent = 'Начать';
 
 });

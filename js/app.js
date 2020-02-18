@@ -62,7 +62,8 @@ window.addEventListener('DOMContentLoaded', function(){
                 (timer.minutes !== 0) ? timerMinutes.textContent = addNull(timer.minutes) : 
                     timerMinutes.textContent = declOfNum(timer.minutes,['минута','минуты','минут']);
                 (timer.seconds !== 0) ? timerSeconds.textContent = addNull(timer.seconds) : 
-                timerSeconds.textContent = declOfNum(timer.seconds,['секунад','секунды','секунд']);
+                timerSeconds.textContent = addNull(timer.seconds);
+                // timerSeconds.textContent = declOfNum(timer.seconds,['секунад','секунды','секунд']);
 
               
             }
@@ -73,7 +74,7 @@ window.addEventListener('DOMContentLoaded', function(){
            
     }
 
-    countTimer('18 feb 2020 13:52');
+    countTimer('18 feb 2020 16:58');
 
     
     

@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 if (timeRemaining <= 1){
                     stopTimer();
                     addTimeRemaining();
-                    // return { hours : 0, minutes : 0, seconds : 0, day : 0 } // первый урок
+                    return { hours : 0, minutes : 0, seconds : 0, day : 0 } // первый урок
                 }
                 
                 return {
@@ -45,7 +45,9 @@ window.addEventListener('DOMContentLoaded', function(){
             let addTimeRemaining = () =>{
                 let addDays = 1;
                 let date = new Date()
-                date.setDate(date.getDate() + addDays);
+                // let dateHours = 24 - date.getHours(); 
+                date.setHours(date.getHours() + (24 - date.getHours()));
+                date.setMinutes(60 - date.getMinutes());
                 countTimer(date);
             }
             let stopTimer = () => {
@@ -57,7 +59,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 
                 (timer.day !== 0)? timerDay.textContent = declOfNum(timer.day,['день','дня','дней']):
                 timerDay.style.display = 'none';
-                (timer.hours !== 0) ? timerHours.textContent = addNull( timer.hours -(timer.day *24)) : 
+                (timer.hours !== 0 ) ? timerHours.textContent = addNull( timer.hours -(timer.day *24)) : 
                     timerHours.textContent = declOfNum(timer.hours,['час','часа','часов']);
                 (timer.minutes !== 0) ? timerMinutes.textContent = addNull(timer.minutes) : 
                     timerMinutes.textContent = declOfNum(timer.minutes,['минута','минуты','минут']);
@@ -74,7 +76,13 @@ window.addEventListener('DOMContentLoaded', function(){
            
     }
 
-    countTimer('18 feb 2020 16:58');
+    countTimer('18 feb 2020 22:51');
+
+    let datez = new Date();
+    let dateAction = 24 - datez.getHours(); 
+    console.log('dateAction: ', dateAction);
+    console.dir(datez);
+    console.log('datez.getHours: ', datez.getHours(), datez.getMinutes(), datez.getDay(), datez.getFullYear(), datez.getMonth());
 
     
     

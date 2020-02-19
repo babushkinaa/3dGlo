@@ -175,7 +175,41 @@ window.addEventListener('DOMContentLoaded', function(){
    
            }); 
         });
-        popupClose.addEventListener('click', () => popUp.style.display = 'none');
+        popupClose.addEventListener('click', () => {
+            let op = 1, opacity;
+                    const setOpacity = () => {
+                        let opacity;
+                            if( op > 0 ) {
+                                opacity = requestAnimationFrame(setOpacity);
+                                op -=0.02;
+                                popUp.style.opacity = op;
+                            
+                            } else{
+                                cancelAnimationFrame(opacity);
+                                popUp.style.display = 'none';
+                            }
+                    }
+                    setOpacity();
+            
+        });
+        
+        //щелчек по фону закрытие popup
+        popUp.addEventListener('click',()=>{
+            let op = 1, opacity;
+            const setOpacity = () => {
+                let opacity;
+                    if( op > 0 ) {
+                        opacity = requestAnimationFrame(setOpacity);
+                        op -=0.02;
+                        popUp.style.opacity = op;
+                    
+                    } else{
+                        cancelAnimationFrame(opacity);
+                        popUp.style.display = 'none';
+                    }
+            }
+            setOpacity();
+        });
 
     }
     toglePopup();

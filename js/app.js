@@ -84,14 +84,75 @@ window.addEventListener('DOMContentLoaded', function(){
 
     const toggleMenu = () =>{
 
-        const btnMenu = document.querySelector('.menu');
-        const menu = document.querySelector('.menu');
-        // menu.style.display = 'block';
-        console.log('menu: ', menu);
-        console.dir(menu);
+        const btnMenu = document.querySelector('.menu'),
+              menu = document.querySelector('menu'),
+              closeBtn = menu.querySelector('.close-btn'),
+              menuItems = menu.querySelectorAll('ul>li');
+              
+           
+
+    
+
+    // функция скрытия или отображения меню
+    const handlerMenu = ()=>{
+            // проверяем есть ли у элемента свойство translate(-100%)
+            // if (!menu.style.transform || menu.style.transform === 'translate(-100%)') {
+            //     menu.style.transform = 'translate(0)';
+            // } else {
+            //     menu.style.transform = 'translate(-100%)';
+            // }
+
+            //более простой метод взаимодействовать с классом toggle добавляет или удаляет нужный класс элементу
+            menu.classList.toggle ('active-menu');
+
+    };
+        // событие на меню
+        btnMenu.addEventListener('click',handlerMenu); 
+                
+        // крестик в меню        
+        closeBtn.addEventListener('click',handlerMenu);
+               
+        // навешиваем событие на каждый элемент меню    
+        menuItems.forEach((element) => element.addEventListener('click',handlerMenu)); 
+           
+    }
+
+    toggleMenu();
+
+    //popup
+    const toglePopup = () =>{
+        const popUp = document.querySelector('.popup'),
+              popupBtn = document.querySelectorAll('.popup-btn'),
+              popupClose = document.querySelector('.popup-close');
+
+        popupBtn.forEach((element)=>{
+           element.addEventListener('click', ()=>{
+               if( document.documentElement.clientWidth <= 768 ){
+                    popUp.style.display = 'block';
+               } else{
+                    popUp.style.display = 'block';
+                    popUp.style.opacity = 0;
+                    let op = 0;
+                    const setOpacity = () => {
+                        let opacity;
+                            if( op < 1 ) {
+                                let opacity = requestAnimationFrame(setOpacity);
+                                op +=0.04;
+                                popUp.style.opacity = op;
+                            
+                            } else{
+                                cancelAnimationFrame(opacity);
+                            }
+                    }
+                    setOpacity();
+               }
+   
+           }); 
+        });
+        popupClose.addEventListener('click', () => popUp.style.display = 'none');
 
     }
-    toggleMenu();
+    toglePopup();
 
 
    

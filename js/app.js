@@ -6,9 +6,11 @@ window.addEventListener('DOMContentLoaded', function(){
         return (num.length === 1)? num = '0' + num : num = num;        
     }
 
-    // Никита - нашел функцию которую Макс на стриме показывал
+    // функцию день дней дня
     const declOfNum = (number, titles) => addNull(number) + ' ' + titles[(number % 100 > 4 && number % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(number % 10 < 5) ? number % 10 : 5]];
     
+    // таймер
+
     function countTimer(deadLine) {
         let timerHours = document.querySelector('#timer-hours'),
             timerDay = document.querySelector('#timer-days'),
@@ -60,9 +62,9 @@ window.addEventListener('DOMContentLoaded', function(){
                 (timer.day !== 0)? timerDay.textContent = declOfNum(timer.day,['день','дня','дней']):
                 timerDay.style.display = 'none';
                 (timer.hours !== 0 ) ? timerHours.textContent = addNull( timer.hours -(timer.day *24)) : 
-                    timerHours.textContent = declOfNum(timer.hours,['час','часа','часов']);
+                    timerHours.textContent = declOfNum(timer.hours,[' ч',' ч',' ч']);
                 (timer.minutes !== 0) ? timerMinutes.textContent = addNull(timer.minutes) : 
-                    timerMinutes.textContent = declOfNum(timer.minutes,['минута','минуты','минут']);
+                    timerMinutes.textContent = declOfNum(timer.minutes,[' м',' м',' м']);
                 (timer.seconds !== 0) ? timerSeconds.textContent = addNull(timer.seconds) : 
                 timerSeconds.textContent = addNull(timer.seconds);
                 // timerSeconds.textContent = declOfNum(timer.seconds,['секунад','секунды','секунд']);
@@ -75,16 +77,27 @@ window.addEventListener('DOMContentLoaded', function(){
            
            
     }
+    countTimer('19 feb 2020 12:15');
 
-    countTimer('18 feb 2020 22:51');
 
-    let datez = new Date();
-    let dateAction = 24 - datez.getHours(); 
-    console.log('dateAction: ', dateAction);
-    console.dir(datez);
-    console.log('datez.getHours: ', datez.getHours(), datez.getMinutes(), datez.getDay(), datez.getFullYear(), datez.getMonth());
+    // меню
 
+    const toggleMenu = () =>{
+
+        const btnMenu = document.querySelector('.menu');
+        const menu = document.querySelector('.menu');
+        // menu.style.display = 'block';
+        console.log('menu: ', menu);
+        console.dir(menu);
+
+    }
+    toggleMenu();
+
+
+   
     
-    
-
+    let prev = performance.now();
+    console.log('prev: ', prev);
 });
+
+

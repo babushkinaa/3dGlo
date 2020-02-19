@@ -93,33 +93,59 @@ window.addEventListener('DOMContentLoaded', function(){
 
     
 
-    // функция скрытия или отображения меню
-    const handlerMenu = ()=>{
-            // проверяем есть ли у элемента свойство translate(-100%)
-            // if (!menu.style.transform || menu.style.transform === 'translate(-100%)') {
-            //     menu.style.transform = 'translate(0)';
-            // } else {
-            //     menu.style.transform = 'translate(-100%)';
-            // }
+        // функция скрытия или отображения меню
+        const handlerMenu = ()=>{
+                // проверяем есть ли у элемента свойство translate(-100%)
+                // if (!menu.style.transform || menu.style.transform === 'translate(-100%)') {
+                //     menu.style.transform = 'translate(0)';
+                // } else {
+                //     menu.style.transform = 'translate(-100%)';
+                // }
 
-            //более простой метод взаимодействовать с классом toggle добавляет или удаляет нужный класс элементу
-            menu.classList.toggle ('active-menu');
-
-    };
-        // событие на меню
-        btnMenu.addEventListener('click',handlerMenu); 
+                //более простой метод взаимодействовать с классом toggle добавляет или удаляет нужный класс элементу
+                menu.classList.toggle ('active-menu');
                 
-        // крестик в меню        
-        closeBtn.addEventListener('click',handlerMenu);
-               
-        // навешиваем событие на каждый элемент меню    
-        menuItems.forEach((element) => element.addEventListener('click',handlerMenu)); 
+
+        };
+        // плавный скроллинг
+        const slowScroll = () => {
+            let tagTarget = event.target.hash,
+                moveToElement,
+                divTargetY;
+                tagTarget = '.'+tagTarget.substr(1);
+                divTargetY = document.querySelector(tagTarget).offsetTop;
+  
+                event.target.href = '#';
+
+                let scrollItem = () => {
+                    if (window.pageYOffset <= divTargetY) {
+                        moveToElement = requestAnimationFrame(scrollItem);
+                        this.scrollBy(0, 80);
+                    } else {
+                        cancelAnimationFrame(moveToElement);
+                    }
+                     
+                  }
+                  event.target.addEventListener('click', scrollItem);
+                  scrollItem();
+
+        };
+            // событие на меню
+            btnMenu.addEventListener('click',handlerMenu); 
+                    
+            // крестик в меню        
+            closeBtn.addEventListener('click',handlerMenu);
+                
+            // навешиваем событие на каждый элемент меню    
+            menuItems.forEach((element) => element.addEventListener('click',handlerMenu)); 
+            menuItems.forEach((element) => element.addEventListener('click',slowScroll)); 
            
     }
 
     toggleMenu();
 
     //popup
+
     const toglePopup = () =>{
         const popUp = document.querySelector('.popup'),
               popupBtn = document.querySelectorAll('.popup-btn'),
@@ -154,11 +180,35 @@ window.addEventListener('DOMContentLoaded', function(){
     }
     toglePopup();
 
+    //прокрутка до услуг
 
-   
-    
-    let prev = performance.now();
-    console.log('prev: ', prev);
+    const slowScroll = () =>{
+        const imgBtn = document.querySelector('main>a'),
+              targetAncor = document.querySelector('.service-block'),
+              bodyItem = document.querySelector('body'),
+              targetY = targetAncor.offsetTop;
+              imgBtn.href = '#';
+        let top,              
+            moveToElement;
+          
+              let scrollItem = () => {
+                // event.preventDefault();
+                if (window.pageYOffset < targetY) {
+                    moveToElement = requestAnimationFrame(scrollItem);
+
+                    this.scrollBy(0, 20);
+                    
+                } else {
+                    cancelAnimationFrame(moveToElement);
+                }
+              };
+              imgBtn.addEventListener('click', scrollItem);
+
+    };
+    slowScroll();
+
+    //плавная прокрутка
+
+
 });
-
 

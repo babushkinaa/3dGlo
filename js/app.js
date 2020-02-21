@@ -96,7 +96,7 @@ window.addEventListener('DOMContentLoaded', function(){
             (target.closest('.menu')) ? menu.classList.toggle ('active-menu') : null;
             (target.closest('.active-menu')) ? menu.classList.toggle ('active-menu') : null;
             (target.matches('.close-btn')) ? menu.classList.toggle ('active-menu') : null;
-            (target.tagName ==='A') ? slowScroll() : null;
+            (target.tagName ==='A') ? slowScroll(event) : null;
            
 
         });      
@@ -119,16 +119,19 @@ window.addEventListener('DOMContentLoaded', function(){
 
         // };
         // плавный скроллинг
-        const slowScroll = () => {
-            menu.classList.toggle ('active-menu');
-            let tagTarget = event.target.hash,
-                moveToElement,
-                divTargetY;
-                tagTarget = '.'+tagTarget.substr(1);
-                divTargetY = document.querySelector(tagTarget).offsetTop;
+        const slowScroll = (event) => {
+            console.log('event: ', event);
+            let tagTarget = event.target.hash.substr(1),
+                divTargetY = document.querySelector('.'+tagTarget).offsetTop,
+            
+                moveToElement;
+                // divTargetY;
+                // tagTarget = '.'+tagTarget.substr(1);
+          
+                // divTargetY = document.querySelector('.'+tagTarget).offsetTop;
   
                 event.target.href = '#';
-
+              
                 let scrollItem = () => {
                     if (window.pageYOffset <= divTargetY) {
                         moveToElement = requestAnimationFrame(scrollItem);
@@ -137,8 +140,8 @@ window.addEventListener('DOMContentLoaded', function(){
                         cancelAnimationFrame(moveToElement);
                     }
                      
-                  }
-                  event.target.addEventListener('click', scrollItem);
+                }
+                //   event.target.addEventListener('click', scrollItem);
                   scrollItem();
 
         };

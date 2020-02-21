@@ -92,16 +92,23 @@ window.addEventListener('DOMContentLoaded', function(){
         document.addEventListener('click',(event)=>{
 
             let target = event.target;
+            console.log(target);
+            // console.log('target: ', menu.classList.contains('active-menu'));
            
             if (target.closest('.menu')) {
                 menu.classList.toggle ('active-menu');
+                return;
             }
-            if (target.tagName.toUpperCase() === 'MAIN') {
+            if (target.closest('.close-btn')) {
                 menu.classList.toggle ('active-menu');
+
             }
-            if (target.closest('.active-menu')) {
-                menu.classList.toggle ('active-menu');
-            } 
+            if (!target.closest('.active-menu')) {
+                console.log('target', target);
+
+                menu.classList.remove ('active-menu');
+            }
+         
             if (target.tagName.toUpperCase() ==='A'&& !target.closest('.close-btn')) {
                 slowScroll(event);
             } 
@@ -112,6 +119,8 @@ window.addEventListener('DOMContentLoaded', function(){
         // плавный скроллинг
         const slowScroll = (event) => {
             console.log('event: ', event);
+            menu.classList.remove ('active-menu');
+
             let tagTarget = event.target.hash.substr(1),
                 divTargetY = document.querySelector('.'+tagTarget).offsetTop,
             
@@ -279,6 +288,11 @@ window.addEventListener('DOMContentLoaded', function(){
 
     };
     tabs();
+
+    const slider = () =>{
+
+    };
+    slider();
 
 });
 

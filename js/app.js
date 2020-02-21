@@ -93,31 +93,22 @@ window.addEventListener('DOMContentLoaded', function(){
 
             let target = event.target;
            
-            (target.closest('.menu')) ? menu.classList.toggle ('active-menu') : null;
-            (target.closest('.active-menu')) ? menu.classList.toggle ('active-menu') : null;
-            (target.matches('.close-btn')) ? menu.classList.toggle ('active-menu') : null;
-            (target.tagName ==='A') ? slowScroll(event) : null;
+            if (target.closest('.menu')) {
+                menu.classList.toggle ('active-menu');
+            }
+            if (target.tagName.toUpperCase() === 'MAIN') {
+                menu.classList.toggle ('active-menu');
+            }
+            if (target.closest('.active-menu')) {
+                menu.classList.toggle ('active-menu');
+            } 
+            if (target.tagName.toUpperCase() ==='A'&& !target.closest('.close-btn')) {
+                slowScroll(event);
+            } 
            
 
         });      
-        
-    
-
-        // функция скрытия или отображения меню
-        // const handlerMenu = ()=>{
-        //     console.log(event.target);
-        //         // проверяем есть ли у элемента свойство translate(-100%)
-        //         // if (!menu.style.transform || menu.style.transform === 'translate(-100%)') {
-        //         //     menu.style.transform = 'translate(0)';
-        //         // } else {
-        //         //     menu.style.transform = 'translate(-100%)';
-        //         // }
-
-        //         //более простой метод взаимодействовать с классом toggle добавляет или удаляет нужный класс элементу
-        //         menu.classList.toggle ('active-menu');
-                
-
-        // };
+      
         // плавный скроллинг
         const slowScroll = (event) => {
             console.log('event: ', event);
@@ -125,11 +116,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 divTargetY = document.querySelector('.'+tagTarget).offsetTop,
             
                 moveToElement;
-                // divTargetY;
-                // tagTarget = '.'+tagTarget.substr(1);
-          
-                // divTargetY = document.querySelector('.'+tagTarget).offsetTop;
-  
+                
                 event.target.href = '#';
               
                 let scrollItem = () => {
@@ -141,7 +128,6 @@ window.addEventListener('DOMContentLoaded', function(){
                     }
                      
                 }
-                //   event.target.addEventListener('click', scrollItem);
                   scrollItem();
 
         };

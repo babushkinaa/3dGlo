@@ -51,8 +51,8 @@ function stopCallback(){
 start.addEventListener('click',callback);
 // stop.addEventListener('click',stopCallback);
 reset.addEventListener('click',()=>{
-    box1.style.left = box1Left + 'px';
-    box1.style.top = box1Top + 'px';
+    box1.style.left = '';
+    box1.style.top = '';
     rAf = 0;
     start.textContent = 'Начать';
 

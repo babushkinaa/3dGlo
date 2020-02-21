@@ -89,26 +89,38 @@ window.addEventListener('DOMContentLoaded', function(){
               closeBtn = menu.querySelector('.close-btn'),
               menuItems = menu.querySelectorAll('ul>li');
               
+        document.addEventListener('click',(event)=>{
+
+            let target = event.target;
+           
+            (target.closest('.menu')) ? menu.classList.toggle ('active-menu') : null;
+            // (target.closest('.active-menu')) ? menu.classList.toggle ('active-menu') : null;
+            (target.matches('.close-btn')) ? menu.classList.toggle ('active-menu') : null;
+            // (target.tagName ==='A') ? slowScroll() : null;
            
 
+        });      
+        
     
 
         // функция скрытия или отображения меню
-        const handlerMenu = ()=>{
-                // проверяем есть ли у элемента свойство translate(-100%)
-                // if (!menu.style.transform || menu.style.transform === 'translate(-100%)') {
-                //     menu.style.transform = 'translate(0)';
-                // } else {
-                //     menu.style.transform = 'translate(-100%)';
-                // }
+        // const handlerMenu = ()=>{
+        //     console.log(event.target);
+        //         // проверяем есть ли у элемента свойство translate(-100%)
+        //         // if (!menu.style.transform || menu.style.transform === 'translate(-100%)') {
+        //         //     menu.style.transform = 'translate(0)';
+        //         // } else {
+        //         //     menu.style.transform = 'translate(-100%)';
+        //         // }
 
-                //более простой метод взаимодействовать с классом toggle добавляет или удаляет нужный класс элементу
-                menu.classList.toggle ('active-menu');
+        //         //более простой метод взаимодействовать с классом toggle добавляет или удаляет нужный класс элементу
+        //         menu.classList.toggle ('active-menu');
                 
 
-        };
+        // };
         // плавный скроллинг
-        const slowScroll = () => {
+        const slowScroll = (event) => {
+            menu.classList.toggle ('active-menu');
             let tagTarget = event.target.hash,
                 moveToElement,
                 divTargetY;
@@ -131,13 +143,13 @@ window.addEventListener('DOMContentLoaded', function(){
 
         };
             // событие на меню
-            btnMenu.addEventListener('click',handlerMenu); 
+            // btnMenu.addEventListener('click',handlerMenu); 
                     
             // крестик в меню        
-            closeBtn.addEventListener('click',handlerMenu);
+            // closeBtn.addEventListener('click',handlerMenu);
                 
             // навешиваем событие на каждый элемент меню    
-            menuItems.forEach((element) => element.addEventListener('click',handlerMenu)); 
+            // menuItems.forEach((element) => element.addEventListener('click',handlerMenu)); 
             menuItems.forEach((element) => element.addEventListener('click',slowScroll)); 
            
     }
@@ -181,7 +193,7 @@ window.addEventListener('DOMContentLoaded', function(){
                         let opacity;
                             if( op > 0 ) {
                                 opacity = requestAnimationFrame(setOpacity);
-                                op -=0.02;
+                                op -=0.08;
                                 popUp.style.opacity = op;
                             
                             } else{
@@ -192,7 +204,7 @@ window.addEventListener('DOMContentLoaded', function(){
                     setOpacity();
             
         });
-        
+
         //щелчек по фону закрытие popup
         popUp.addEventListener('click',()=>{
             let op = 1, opacity;
@@ -200,7 +212,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 let opacity;
                     if( op > 0 ) {
                         opacity = requestAnimationFrame(setOpacity);
-                        op -=0.02;
+                        op -=0.3;
                         popUp.style.opacity = op;
                     
                     } else{
@@ -241,8 +253,43 @@ window.addEventListener('DOMContentLoaded', function(){
     };
     slowScroll();
 
-    //плавная прокрутка
+    //табы наши услуги
 
+    const tabs = () => {
+        const tabHeader = document.querySelector('.service-header'),
+              tab = document.querySelectorAll('.service-header-tab'),
+              tabContent = document.querySelectorAll('.service-tab');
+  
+
+        // добавляем класс bootstrap  d-none (display-none)      
+        const toggleTabContent = (index) => {
+            tabContent.forEach((element, i) => {
+                if(index === i){
+                    // console.log(element);
+                    element.classList.remove('d-none');
+                    tab[i].classList.add('active');
+                } else {
+                    element.classList.add('d-none');
+                    tab[i].classList.remove('active');
+                }
+            });
+        };     
+
+              tabHeader.addEventListener('click',(event) =>{
+                  let target = event.target; // присвоим событие прилетевшее в обработчик переменной target
+                      target = target.closest('.service-header-tab');  // переопределим target если у элемента нет класса service-header-tab
+                                                                       // проверяем у родителя класс 
+                      tab.forEach((item,i) => {
+                          if(item === target){
+                            toggleTabContent(i);
+                            
+                          }
+                      });
+                  
+              });
+
+    };
+    tabs();
 
 });
 

@@ -94,9 +94,9 @@ window.addEventListener('DOMContentLoaded', function(){
             let target = event.target;
            
             (target.closest('.menu')) ? menu.classList.toggle ('active-menu') : null;
-            // (target.closest('.active-menu')) ? menu.classList.toggle ('active-menu') : null;
+            (target.closest('.active-menu')) ? menu.classList.toggle ('active-menu') : null;
             (target.matches('.close-btn')) ? menu.classList.toggle ('active-menu') : null;
-            // (target.tagName ==='A') ? slowScroll() : null;
+            (target.tagName ==='A') ? slowScroll() : null;
            
 
         });      
@@ -150,7 +150,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 
             // навешиваем событие на каждый элемент меню    
             // menuItems.forEach((element) => element.addEventListener('click',handlerMenu)); 
-            menuItems.forEach((element) => element.addEventListener('click',slowScroll)); 
+            // menuItems.forEach((element) => element.addEventListener('click',slowScroll)); 
            
     }
 

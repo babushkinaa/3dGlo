@@ -119,7 +119,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
         // };
         // плавный скроллинг
-        const slowScroll = (event) => {
+        const slowScroll = () => {
             menu.classList.toggle ('active-menu');
             let tagTarget = event.target.hash,
                 moveToElement,

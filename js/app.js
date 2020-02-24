@@ -110,7 +110,7 @@ window.addEventListener('DOMContentLoaded', function(){
             }
          
             if (target.tagName.toUpperCase() ==='A'&& !target.closest('.close-btn') && !target.closest('.portfolio-btn')) {
-                slowScroll(event);portfolio-btn
+                slowScroll(event);//portfolio-btn
             } 
            
 
@@ -298,7 +298,7 @@ window.addEventListener('DOMContentLoaded', function(){
         let   dot = document.querySelectorAll('.dot');
 
 
-        console.log(slide, btn, dot, slider,parrentDot);
+        // console.log(slide, btn, dot, slider,parrentDot);
 
         let currentSlide = 0, // первый слайд
             interval; //переменная для остановки счетчика
@@ -414,7 +414,7 @@ window.addEventListener('DOMContentLoaded', function(){
                         parrentDot.appendChild(elementLi);
                     }
                     
-                    console.log(i);
+                    // console.log(i);
                 });
                 dot = document.querySelectorAll('.dot');
 
@@ -425,6 +425,46 @@ window.addEventListener('DOMContentLoaded', function(){
         startSlide();
     };
     slider();
+
+    const command = () =>{
+
+        const changeData = (event) =>{
+            const eventAttribut = "data-img";
+            const imgSrc = event.getAttribute('src');
+            event.hasAttribute(eventAttribut) ? event.src = event.dataset.img : 'null'; 
+            event.setAttribute(eventAttribut, imgSrc);
+        };
+        const reverseData = (event) =>{
+            const eventAttribut = "data-img";
+            const imgSrc = event.getAttribute('src');
+            event.hasAttribute(eventAttribut) ? event.src = event.dataset.img : 'null';
+            event.setAttribute(eventAttribut, imgSrc);
+        };
+
+        document.addEventListener('mouseover', event => {
+            let target = event.target;
+            if (target.closest('.command__photo')) {
+                changeData(target);
+            }
+        });
+        document.addEventListener('mouseout', event => {
+            let target = event.target;
+            if (target.closest('.command__photo')) {
+                reverseData(target);
+            }
+        });
+
+    }; command();
+
+    // не знаю это работе не мешает но изначально в верстке уже есть проверка - может через css
+    const calculate = ()=>{
+        document.addEventListener('input', event => {
+            let target = event.target;
+            if (target.closest('.calc-item')) {
+                target.value = target.value.replace(/\D/g,'');
+            }
+        })
+    }; calculate();
     
 
 });

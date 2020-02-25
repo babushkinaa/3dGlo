@@ -468,21 +468,21 @@ window.addEventListener('DOMContentLoaded', function(){
         // доп задание    
         const showPrice = (totalCalc) => {
 
-            // let op = 0, total = 0;
-            //         const setOpacity = () => {
-            //             let opacity;
-            //                 if( op < totalCalc ) {
-            //                     let opacity = requestAnimationFrame(setOpacity);
-            //                     op +=10;
+            let op = 0, total = 0;
+                    const setOpacity = () => {
+                        let opacity;
+                            if( op < totalCalc ) {
+                                let opacity = requestAnimationFrame(setOpacity);
+                                op +=10;
                                 
-            //                     totalValue.textContent = op;
+                                totalValue.textContent = op;
                             
-            //                 } else{
-            //                     cancelAnimationFrame(opacity);
-            //                 }
-            //         }
-            //         setOpacity();
-            totalValue.textContent = totalCalc;
+                            } else{
+                                cancelAnimationFrame(opacity);
+                            }
+                    }
+                    setOpacity();
+            // totalValue.textContent = totalCalc;
         };    
 
         const coutnSum = ( price ) =>{

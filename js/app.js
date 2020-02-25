@@ -467,16 +467,48 @@ window.addEventListener('DOMContentLoaded', function(){
 
         // доп задание    
         const showPrice = (totalCalc) => {
+
+            // let op = 0, total = 0;
+            //         const setOpacity = () => {
+            //             let opacity;
+            //                 if( op < totalCalc ) {
+            //                     let opacity = requestAnimationFrame(setOpacity);
+            //                     op +=10;
+                                
+            //                     totalValue.textContent = op;
+                            
+            //                 } else{
+            //                     cancelAnimationFrame(opacity);
+            //                 }
+            //         }
+            //         setOpacity();
             totalValue.textContent = totalCalc;
         };    
 
         const coutnSum = ( price ) =>{
 
-            let total = 0;
-            let typeValue = calcType.options[calcType.selectedIndex].value;
-            console.dir(calcType.options);
-            console.log('typeValue: ', typeValue);
+            let total = 0, // результат
+                countValue = 1, // помещений по умолчанию 
+                dayValue = 1; // дней по умолчанию
+            const typeValue = calcType.options[calcType.selectedIndex].value,
+                  squareValue = +calcSquare.value;
 
+                if( calcCount.value > 1){
+                    countValue += ( calcCount.value - 1 )/ 10;
+                }
+
+                if (calcDay.value && calcDay.value < 5) {
+                    dayValue *= 2;
+                } else if (calcDay.value && calcDay.value <10) {
+                    dayValue *= 1.5;
+                }
+
+
+                if (typeValue &&  squareValue) {
+                    total = price * typeValue * squareValue * countValue * dayValue;
+                } 
+               
+           
             showPrice(total);
         };    
 
@@ -485,8 +517,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
             if (target === calcType || target === calcSquare || target === calcDay || target === calcCount ) {
                 // более короткий способ if (target.matches('select') || target.matches('input'))
-                // console.log(1);
-                coutnSum();
+                coutnSum(price);
             }
 
         });
@@ -494,8 +525,8 @@ window.addEventListener('DOMContentLoaded', function(){
 
         document.addEventListener('input', event => {
             let target = event.target;
-            if (target.closest('.calc-item')) {
-                target.value = target.value.replace(/\D/g,'');
+            if (target.matches('input')) {
+                target.value = target.value.replace(/[^0-9]/,'');
             }
         })
     }; calculate( 100 );

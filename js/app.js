@@ -118,7 +118,7 @@ window.addEventListener('DOMContentLoaded', function(){
       
         // плавный скроллинг
         const slowScroll = (event) => {
-            console.log('event: ', event);
+            // console.log('event: ', event);
             menu.classList.remove ('active-menu');
 
             let tagTarget = event.target.hash.substr(1),
@@ -425,7 +425,7 @@ window.addEventListener('DOMContentLoaded', function(){
         startSlide();
     };
     slider();
-
+    // команда изменение фоток при наведении мышкой
     const command = () =>{
 
         const changeData = (event) =>{
@@ -456,15 +456,49 @@ window.addEventListener('DOMContentLoaded', function(){
 
     }; command();
 
-    // не знаю это работе не мешает но изначально в верстке уже есть проверка - может через css
-    const calculate = ()=>{
+    // калькулятор не знаю это работе не мешает но изначально в верстке уже есть проверка - может через css
+    const calculate = ( price = 100 ) => {
+        const calcBlock =  document.querySelector('.calc-block'), // общий блок калькулятора
+            calcType = document.querySelector('.calc-type'), // тип помещения
+            calcSquare = document.querySelector('.calc-square'), // площадь помещения
+            calcDay = document.querySelector('.calc-day'), // количество дней
+            calcCount = document.querySelector('.calc-count'), // количество помещений
+            totalValue = document.querySelector('#total'); // результат
+
+        // доп задание    
+        const showPrice = (totalCalc) => {
+            totalValue.textContent = totalCalc;
+        };    
+
+        const coutnSum = ( price ) =>{
+
+            let total = 0;
+            let typeValue = calcType.options[calcType.selectedIndex].value;
+            console.dir(calcType.options);
+            console.log('typeValue: ', typeValue);
+
+            showPrice(total);
+        };    
+
+        calcBlock.addEventListener('change', event => {
+            const target = event.target;
+
+            if (target === calcType || target === calcSquare || target === calcDay || target === calcCount ) {
+                // более короткий способ if (target.matches('select') || target.matches('input'))
+                // console.log(1);
+                coutnSum();
+            }
+
+        });
+
+
         document.addEventListener('input', event => {
             let target = event.target;
             if (target.closest('.calc-item')) {
                 target.value = target.value.replace(/\D/g,'');
             }
         })
-    }; calculate();
+    }; calculate( 100 );
     
 
 });

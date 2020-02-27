@@ -523,13 +523,13 @@ window.addEventListener('DOMContentLoaded', function(){
         });
 
 
-        // document.addEventListener('input', event => {
-        //     let target = event.target;
-        //     // if (target.matches('input')) {
-        //     if (target === calc-square) {
-        //         target.value = target.value.replace(/[^0-9]/,'');
-        //     }
-        // })
+        document.addEventListener('input', event => {
+            let target = event.target;
+            // if (target.matches('input')) {
+            if (target === calcType || target === calcSquare || target === calcDay || target === calcCount) {
+                target.value = target.value.replace(/[^0-9]/,'');
+            }
+        })
     }; calculate( 100 );
 
     //маска для ввода

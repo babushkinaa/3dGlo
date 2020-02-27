@@ -12,12 +12,14 @@ class Validator{
     }
     // метод для запуска валидатора
     init(){
-        console.log(this.error);
         this.applyStyle(); // создадим элемент для вставки стилий в HEAD
         this.elementsForm.forEach(elem => elem.addEventListener('change', this.checkIt.bind(this))); // обязательно нужно bind иначе теряем контекст вызова
         this.setPattern();
         this.form.addEventListener('submit', event => {
-            this.elementsForm.forEach( elem => this.checkIt({target: elem}));
+            this.elementsForm.forEach( elem => {
+                console.log({target: elem});
+                this.checkIt({target: elem});
+            });
 
             if (this.error.size) { // если size размер коллекции >0 то делаем event.preventDefault();
                 event.preventDefault();
@@ -58,16 +60,14 @@ class Validator{
         const target = event.target;
 
         if ( this.isValid(target) ) {
-            this.showSuccess(target);
-            this.error.remove(target);
 
-            if (target.nextElementSibling.classList.contains('validator-error')) {
-                this.error.remove(target);
-            }
+            this.showSuccess(target);
+            this.error.delete(target.id);
+
             
         } else {
             this.showError(target);
-            this.error.add(target);
+            this.error.add(target.id);
         }
 
     }
@@ -100,8 +100,9 @@ class Validator{
             input.success {
                 border: 2px solid green
             }
+           
             input.error {
-                border: 2px solid red
+                border: 2px solid red!important
             }
             .validator-error {
                 font-size: 12px;
@@ -124,6 +125,6 @@ class Validator{
             // this.pattern.email = /^w+@w+\.\w{2,}$/;
 
         }
-        console.log(this.pattern);
+        // console.log(this.pattern);
     }
 }

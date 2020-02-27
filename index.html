@@ -76,7 +76,7 @@
 					<input type="text" class="form-name" id="form1-name" name="user_name" placeholder="Ваше имя" required>
 				</div>
 				<div class="col-12 col-lg-4">
-					<input type="email" class="form-email" id="form1-email" name="user_email" placeholder="E-mail">
+					<input type="email" class="form-email" id="form1-email" name="user_email" placeholder="E-mail" required>
 				</div>
 				<div class="col-12 col-lg-4">
 					<input type="tel" class="form-phone" id="form1-phone" name="user_phone" placeholder="Номер телефона" required>
@@ -420,7 +420,59 @@
 		</div>
 	</div>
 </div>
-
+<script src="./js/validator/validator.js"></script>
+	<script>
+		const validator = new Validator({
+			selector: '#form1', // что валидируем
+			pattern: { 
+				// phone: /^\d+$/,
+				// email: /.+@.+\..+/i,
+				// zip: /^\d{6}/
+				youName: /[а-яА-Я]/
+			},
+			method: {
+				'form1-phone':[ 
+					['notEmpty'], 
+					['pattern', 'phone'] 
+				],
+				'form1-email':[
+					['notEmpty'], 
+					['pattern', 'email'] 
+				],
+				'form1-name':[
+					['notEmpty'], 
+					['pattern', 'youName'] 
+				]
+			}
+		});
+		validator.init();
+		const validator2 = new Validator({
+			selector: '#form2', // что валидируем
+			pattern: { 
+				// phone: /^\d+$/,
+				// email: /.+@.+\..+/i,
+				// zip: /^\d{6}/
+				youName: /[а-яА-Я]/,
+				message: 
+			},
+			method: {
+				'form2-phone':[ 
+					['notEmpty'], 
+					['pattern', 'phone'] 
+				],
+				'form2-email':[
+					['notEmpty'], 
+					['pattern', 'email'] 
+				],
+				'form2-name':[
+					['notEmpty'], 
+					['pattern', 'youName'] 
+				]
+			}
+		});
+		validator2.init();
+	</script>
+<script src="./js/maskPhone.js"></script>
 <script src="./js/app.js"></script>
 </body>
 </html>

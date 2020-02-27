@@ -473,7 +473,7 @@ window.addEventListener('DOMContentLoaded', function(){
                         let opacity;
                             if( op < totalCalc ) {
                                 let opacity = requestAnimationFrame(setOpacity);
-                                op +=10;
+                                op +=50;
                                 
                                 totalValue.textContent = op;
                             
@@ -523,14 +523,21 @@ window.addEventListener('DOMContentLoaded', function(){
         });
 
 
-        document.addEventListener('input', event => {
-            let target = event.target;
-            if (target.matches('input')) {
-                target.value = target.value.replace(/[^0-9]/,'');
-            }
-        })
+        // document.addEventListener('input', event => {
+        //     let target = event.target;
+        //     // if (target.matches('input')) {
+        //     if (target === calc-square) {
+        //         target.value = target.value.replace(/[^0-9]/,'');
+        //     }
+        // })
     }; calculate( 100 );
-    
+
+    //маска для ввода
+    const maskInput = () => {
+        maskPhone('#form1-phone');
+        maskPhone('#form2-phone');
+    };
+    maskInput();
 
 });
 

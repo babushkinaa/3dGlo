@@ -194,6 +194,15 @@ body .main-form input {
     padding-left: 2.7rem;
     color: #000
 }
+body .main-form input .error {
+    width: 29rem;
+    height: 5rem;
+    border-radius: 5rem;
+    font-size: 1.3rem;
+    border: 1px palevioletred;
+    padding-left: 2.7rem;
+    color: #000
+}
 
 body .form-btn {
     display: block;

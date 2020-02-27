@@ -446,6 +446,8 @@
 			}
 		});
 		validator.init();
+		console.log(validator);
+
 		const validator2 = new Validator({
 			selector: '#form2', // что валидируем
 			pattern: { 
@@ -453,7 +455,7 @@
 				// email: /.+@.+\..+/i,
 				// zip: /^\d{6}/
 				youName: /[а-яА-Я]/,
-				message: 
+				// message: 
 			},
 			method: {
 				'form2-phone':[ 
@@ -471,6 +473,7 @@
 			}
 		});
 		validator2.init();
+		console.log(validator2);
 	</script>
 <script src="./js/maskPhone.js"></script>
 <script src="./js/app.js"></script>

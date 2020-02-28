@@ -17,7 +17,7 @@ class Validator{
         this.setPattern();
         this.form.addEventListener('submit', event => {
             this.elementsForm.forEach( elem => {
-                console.log({target: elem});
+                // console.log({target: elem});
                 this.checkIt({target: elem});
             });
 

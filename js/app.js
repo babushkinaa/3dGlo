@@ -77,7 +77,7 @@ window.addEventListener('DOMContentLoaded', function(){
            
            
     }
-    countTimer('19 feb 2020 12:15');
+    countTimer('8 mart 2020 12:15');
 
 
     // меню
@@ -163,6 +163,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
         popupBtn.forEach((element)=>{
            element.addEventListener('click', ()=>{
+            console.log(event.target);
                if( document.documentElement.clientWidth <= 768 ){
                     popUp.style.display = 'block';
                } else{
@@ -186,6 +187,7 @@ window.addEventListener('DOMContentLoaded', function(){
            }); 
         });
         popupClose.addEventListener('click', () => {
+            console.log(event.target);
             let op = 1, opacity;
                     const setOpacity = () => {
                         let opacity;
@@ -205,6 +207,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
         //щелчек по фону закрытие popup
         popUp.addEventListener('click',()=>{
+            console.log(event.target);
             let op = 1, opacity;
             const setOpacity = () => {
                 let opacity;
@@ -266,6 +269,26 @@ window.addEventListener('DOMContentLoaded', function(){
                     // console.log(element);
                     element.classList.remove('d-none');
                     tab[i].classList.add('active');
+                    tabContent.forEach(item => {
+                        if (!item.classList.contains("d-none")) {
+                            item.style.opacity = 0;
+                            let op = 0;
+                            const setOpacity = () => {
+                                let opacity;
+                                    if( op <= 1 ) {
+                                        opacity = requestAnimationFrame(setOpacity);
+                                        op +=0.04;
+                                        item.style.opacity = op;
+                                    
+                                    } else{
+                                        cancelAnimationFrame(opacity);
+                                    }
+                            }
+                            setOpacity();
+                        }
+                    });
+                    
+                    
                 } else {
                     element.classList.add('d-none');
                     tab[i].classList.remove('active');
@@ -431,14 +454,55 @@ window.addEventListener('DOMContentLoaded', function(){
         const changeData = (event) =>{
             const eventAttribut = "data-img";
             const imgSrc = event.getAttribute('src');
+            event.style.opacity = 0;
             event.hasAttribute(eventAttribut) ? event.src = event.dataset.img : 'null'; 
+
+             let op = 0;
+            const setOpacity = () => {
+                let opacity;
+                    if( op <= 1 ) {
+                        opacity = requestAnimationFrame(setOpacity);
+                        op +=0.02;
+                        event.style.opacity = op;
+                    
+                    } else{
+                        cancelAnimationFrame(opacity);
+                    }
+            }
+            setOpacity();
             event.setAttribute(eventAttribut, imgSrc);
+
+
+            // const eventAttribut = "data-img";
+            // const imgSrc = event.getAttribute('src');
+            // event.hasAttribute(eventAttribut) ? event.src = event.dataset.img : 'null'; 
+            // event.setAttribute(eventAttribut, imgSrc);
         };
         const reverseData = (event) =>{
             const eventAttribut = "data-img";
             const imgSrc = event.getAttribute('src');
+            event.style.opacity = 0;
             event.hasAttribute(eventAttribut) ? event.src = event.dataset.img : 'null';
+            let op = 0;
+            const setOpacity = () => {
+                let opacity;
+                    if( op <= 1 ) {
+                        opacity = requestAnimationFrame(setOpacity);
+                        op +=0.04;
+                        event.style.opacity = op;
+                    
+                    } else{
+                        cancelAnimationFrame(opacity);
+                    }
+            }
+            setOpacity();
             event.setAttribute(eventAttribut, imgSrc);
+
+
+            // const eventAttribut = "data-img";
+            // const imgSrc = event.getAttribute('src');
+            // event.hasAttribute(eventAttribut) ? event.src = event.dataset.img : 'null';
+            // event.setAttribute(eventAttribut, imgSrc);
         };
 
         document.addEventListener('mouseover', event => {
@@ -538,6 +602,93 @@ window.addEventListener('DOMContentLoaded', function(){
         maskPhone('#form2-phone');
     };
     maskInput();
+
+    //send-ajax-form
+
+    const sendForm = () =>{
+        const errorMessage = 'Что то пошло не так',
+            loadMessage = 'Загрузка ...',
+            successMessage = 'Ваша заявка получена';
+            
+        const form = document.querySelector('#form1');
+        const statusMessage = document.createElement('div');
+        statusMessage.style.cssText = 'font-size: 4rem;';
+
+        const loader = () =>{
+            const cubeLoader = document.createElement('div');
+            cubeLoader.id = 'cube-loader';
+            const caption = document.createElement('div');
+            caption.classList.add('caption');
+            cubeLoader.appendChild(caption);
+            const cubeLoaders = document.createElement('div');
+            cubeLoaders.classList.add('cube-loader');
+            caption.appendChild(cubeLoaders);
+        
+            for (let i = 1; i <= 4; i++) {
+                const loaderItem = document.createElement('div');
+                loaderItem.classList.add('cube');
+                loaderItem.classList.add('loader-'+i);
+                
+                cubeLoaders.appendChild(loaderItem);
+            }
+           console.log(cubeLoader);
+            form.appendChild(cubeLoader);
+        };loader();
+        
+
+        // form.addEventListener('submit',(event) => {
+        document.addEventListener('submit',(event) => {
+            event.preventDefault();
+            const target = event.target;
+            console.log('target: ', target);
+            target.appendChild(statusMessage);
+            // form.appendChild(statusMessage); //target
+
+            const request = new XMLHttpRequest();
+            // навешиваем слушателя сразу после создания request  что бы отслеживать все события
+            request.addEventListener('readystatechange', () => {
+                
+                statusMessage.textContent = loadMessage;
+                
+                if ( request.readyState !== 4){
+                    return;
+                }        
+
+                if (request.status === 200 ) {
+                    statusMessage.textContent = successMessage;
+                } else {
+                    successMessage.textContent = errorMessage;
+                }
+
+            });
+
+
+            request.open('POST', './server.php');
+            request.setRequestHeader('Content-Type', 'aplication/json'); //JSON
+            // request.setRequestHeader('Content-Type', 'multipart/form-data'); // если отправляем formData
+
+            const formData = new FormData(target);
+            // const formData = new FormData(form); //target
+            let body = {};
+            // for (const i of formData.entries()) {
+            //     body[i[0]] = i[1];
+            // }
+            formData.forEach((val, key) =>{
+                body[key] = val;
+            });
+            console.log('JSON.stringify(body);: ', JSON.stringify(body)); 
+            console.log(body);
+            // request.send(formData); // если отправляем formData
+            request.send(JSON.stringify(body)); //JSON
+           
+
+            
+
+
+        });
+
+    };
+    sendForm();
 
 });
 

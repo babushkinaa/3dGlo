@@ -16,13 +16,13 @@ class Validator{
         this.elementsForm.forEach(elem => elem.addEventListener('change', this.checkIt.bind(this))); // обязательно нужно bind иначе теряем контекст вызова
         this.setPattern();
         this.form.addEventListener('submit', event => {
-            this.elementsForm.forEach( elem => {
-                // console.log({target: elem});
-                this.checkIt({target: elem});
-            });
-
             if (this.error.size) { // если size размер коллекции >0 то делаем event.preventDefault();
                 event.preventDefault();
+            } else {
+                this.elementsForm.forEach( elem => {
+                    // console.log({target: elem});
+                    this.checkIt({target: elem});
+                });
             }
         })
     }
@@ -58,16 +58,19 @@ class Validator{
     // метод для проверки события change в input по патернам
     checkIt(event){
         const target = event.target;
+        console.log(this.error);
 
         if ( this.isValid(target) ) {
 
             this.showSuccess(target);
-            this.error.delete(target.id);
+            this.error.delete(target);
+            // this.error.delete(target.id);
 
             
         } else {
             this.showError(target);
-            this.error.add(target.id);
+            this.error.add(target);
+            // this.error.add(target.id);
         }
 
     }

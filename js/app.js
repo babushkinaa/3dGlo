@@ -1,3 +1,4 @@
+
 console.log('таймер');
 window.addEventListener('DOMContentLoaded', function(){
     'use strict';
@@ -652,7 +653,16 @@ window.addEventListener('DOMContentLoaded', function(){
         document.addEventListener('submit',(event) => {
             event.preventDefault();
             const target = event.target;
-            console.log('target: ', target);
+            console.log(target.id);
+            // target.querySelector('.form-name').matches('.error')
+            if (target.querySelector('#'+target.id+'-name').matches('.error') || 
+                target.querySelector('#'+target.id+'-email').matches('.error') ||
+                target.querySelector('#'+target.id+'-phone').matches('.error')) {
+                return;
+            }
+            if (target.querySelector('#'+target.id+'-message') && target.querySelector('#'+target.id+'-message').matches('.error')) {
+                return
+            }
             target.appendChild(statusMessage);
             statusMessage.appendChild(imgLoader).style.display = 'none';
             // form.appendChild(statusMessage); //target

@@ -478,6 +478,37 @@
 			}
 		});
 		validator2.init();
+
+		const validator3 = new Validator({
+			selector: '#form3', // что валидируем
+			pattern: { 
+				// phone: /^\d+$/,
+				// email: /.+@.+\..+/i,
+				// zip: /^\d{6}/
+				youName: /^[А-ЯЁа-яё]*$/,
+				youMessage: /^[А-ЯЁа-яё]*$/,
+				// message: 
+			},
+			method: {
+				'form3-phone':[ 
+					['notEmpty'], 
+					['pattern', 'phone'] 
+				],
+				'form3-email':[
+					['notEmpty'], 
+					['pattern', 'email'] 
+				],
+				'form3-name':[
+					['notEmpty'], 
+					['pattern', 'youName'] 
+				],
+				'form2-message': [
+					['notEmpty'], 
+					['pattern', 'youMessage'] 
+				]
+			}
+		});
+		validator3.init();
 	</script>
 <script src="./js/maskPhone.js"></script>
 <script src="./js/app.js"></script>

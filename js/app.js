@@ -610,6 +610,7 @@ window.addEventListener('DOMContentLoaded', function(){
     const maskInput = () => {
         maskPhone('#form1-phone');
         maskPhone('#form2-phone');
+        maskPhone('#form3-phone');
     };
     maskInput();
 
@@ -622,6 +623,7 @@ window.addEventListener('DOMContentLoaded', function(){
             
         const form = document.querySelector('#form1');
         const statusMessage = document.createElement('div');
+        const imgLoader = document.createElement('img');
         statusMessage.style.cssText = 'font-size: 4rem;';
 
         const loader = () =>{
@@ -652,20 +654,32 @@ window.addEventListener('DOMContentLoaded', function(){
             const target = event.target;
             console.log('target: ', target);
             target.appendChild(statusMessage);
+            statusMessage.appendChild(imgLoader).style.display = 'none';
             // form.appendChild(statusMessage); //target
 
             const request = new XMLHttpRequest();
             // навешиваем слушателя сразу после создания request  что бы отслеживать все события
             request.addEventListener('readystatechange', () => {
                 
-                statusMessage.textContent = loadMessage;
+                // statusMessage.textContent = loadMessage;
+                if (request.readyState < 4) {
+                    imgLoader.style.display = 'block';
+                    imgLoader.src = "./images/1.gif";
+                }
                 
                 if ( request.readyState !== 4){
                     return;
                 }        
 
                 if (request.status === 200 ) {
+                    imgLoader.style.display = 'none';
+
                     statusMessage.textContent = successMessage;
+                    target.querySelector('#'+target.id+'-name').value = '';
+                    target.querySelector('#'+target.id+'-email').value = '';
+                    target.querySelector('#'+target.id+'-phone').value = '';
+                    (target.querySelector('#'+target.id+'-message')) ? target.querySelector('#'+target.id+'-message').value = '': null;
+                    
                 } else {
                     successMessage.textContent = errorMessage;
                 }

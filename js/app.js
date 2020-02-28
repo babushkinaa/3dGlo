@@ -161,53 +161,47 @@ window.addEventListener('DOMContentLoaded', function(){
               popupBtn = document.querySelectorAll('.popup-btn'),
               popupClose = document.querySelector('.popup-close');
 
-        popupBtn.forEach((element)=>{
-           element.addEventListener('click', ()=>{
-            console.log(event.target);
-               if( document.documentElement.clientWidth <= 768 ){
-                    popUp.style.display = 'block';
-               } else{
-                    popUp.style.display = 'block';
-                    popUp.style.opacity = 0;
-                    let op = 0;
-                    const setOpacity = () => {
-                        let opacity;
-                            if( op < 1 ) {
-                                let opacity = requestAnimationFrame(setOpacity);
-                                op +=0.04;
-                                popUp.style.opacity = op;
-                            
-                            } else{
-                                cancelAnimationFrame(opacity);
-                            }
-                    }
-                    setOpacity();
-               }
-   
-           }); 
-        });
-        popupClose.addEventListener('click', () => {
-            console.log(event.target);
-            let op = 1, opacity;
-                    const setOpacity = () => {
-                        let opacity;
-                            if( op > 0 ) {
-                                opacity = requestAnimationFrame(setOpacity);
-                                op -=0.08;
-                                popUp.style.opacity = op;
-                            
-                            } else{
-                                cancelAnimationFrame(opacity);
-                                popUp.style.display = 'none';
-                            }
-                    }
-                    setOpacity();
-            
-        });
+        // открываем popup
+        const showPopup = () => {
+            if( document.documentElement.clientWidth <= 768 ){
+                popUp.style.display = 'block';
+           } else{
+                popUp.style.display = 'block';
+                popUp.style.opacity = 0;
+                let op = 0;
+                const setOpacity = () => {
+                    let opacity;
+                        if( op < 1 ) {
+                            let opacity = requestAnimationFrame(setOpacity);
+                            op +=0.04;
+                            popUp.style.opacity = op;
+                        
+                        } else{
+                            cancelAnimationFrame(opacity);
+                        }
+                }
+                setOpacity();
+           }
+        };
 
-        //щелчек по фону закрытие popup
-        popUp.addEventListener('click',()=>{
-            console.log(event.target);
+        const closePopup = () => {
+            let op = 1, opacity;
+            const setOpacity = () => {
+                let opacity;
+                    if( op > 0 ) {
+                        opacity = requestAnimationFrame(setOpacity);
+                        op -=0.08;
+                        popUp.style.opacity = op;
+                    
+                    } else{
+                        cancelAnimationFrame(opacity);
+                        popUp.style.display = 'none';
+                    }
+            }
+            setOpacity();
+        };
+
+        const closePopupBg = () => {
             let op = 1, opacity;
             const setOpacity = () => {
                 let opacity;
@@ -222,7 +216,23 @@ window.addEventListener('DOMContentLoaded', function(){
                     }
             }
             setOpacity();
+        };
+
+        document.addEventListener('click', (event) => {
+            let target = event.target;
+            if (target.closest('.popup-btn')) {
+                console.log('***',target);
+                showPopup();
+            }
+            if (target.closest('.popup-close')) {
+                closePopup();
+            }
+
+            if (!target.closest('.popup-content') && !target.closest('.form-btn')) {
+                closePopupBg();
+            }
         });
+
 
     }
     toglePopup();

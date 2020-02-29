@@ -653,7 +653,7 @@ window.addEventListener('DOMContentLoaded', function(){
         document.addEventListener('submit',(event) => {
             event.preventDefault();
             const target = event.target;
-            console.log(target.id);
+          
             // target.querySelector('.form-name').matches('.error')
             if (target.querySelector('#'+target.id+'-name').matches('.error') || 
                 target.querySelector('#'+target.id+'-email').matches('.error') ||

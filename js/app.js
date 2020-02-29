@@ -673,7 +673,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 
                 // statusMessage.textContent = loadMessage;
                 if (request.readyState !==4) {
-                    imgLoader.style.display = 'block';
+                    imgLoader.style.display = 'inline-block';
                     imgLoader.src = "./images/1.gif";
                 }
                 

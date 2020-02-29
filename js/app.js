@@ -672,7 +672,7 @@ window.addEventListener('DOMContentLoaded', function(){
             request.addEventListener('readystatechange', () => {
                 
                 // statusMessage.textContent = loadMessage;
-                if (request.readyState < 4) {
+                if (request.readyState !==4) {
                     imgLoader.style.display = 'block';
                     imgLoader.src = "./images/1.gif";
                 }

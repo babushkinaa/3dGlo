@@ -8,7 +8,6 @@
 	<title>Услуги по 3D моделированию</title>
 	<link rel="stylesheet" href="./css/bootstrap.min.css">
 	<link rel="stylesheet" href="./css/style.min.css">
-	<link rel="stylesheet" href="./css/loader.css">
 	<link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/favicon/favicon-16x16.png">
@@ -207,6 +206,7 @@
 						<option class="calc-option-title" value="">Выберите тип объекта*</option>
 						<option value="1">Интерьер Квартиры</option>
 						<option value="2">Интерьер Частного дома</option>
+						<!-- value "Интерьер Частного дома" - изменено на 2 (куратор)-->
 						<option value="3">Интерьер Офиса</option>
 					</select>
 					<input type="number" min="1" step="1" class="calc-item calc-square"
@@ -423,12 +423,10 @@
 </div>
 <script src="./js/validator/validator.js"></script>
 	<script>
+		//форма heder
 		const validator = new Validator({
 			selector: '#form1', // что валидируем
 			pattern: { 
-				// phone: /^\d+$/,
-				// email: /.+@.+\..+/i,
-				// zip: /^\d{6}/
 				youName: /^[А-ЯЁа-яё]*$/
 			},
 			method: {
@@ -447,16 +445,12 @@
 			}
 		});
 		validator.init();
-
+		//форма portfolio
 		const validator2 = new Validator({
 			selector: '#form2', // что валидируем
 			pattern: { 
-				// phone: /^\d+$/,
-				// email: /.+@.+\..+/i,
-				// zip: /^\d{6}/
 				youName: /^[А-ЯЁа-яё]*$/,
 				youMessage: /^[А-ЯЁа-яё]*$/,
-				// message: 
 			},
 			method: {
 				'form2-phone':[ 
@@ -478,16 +472,12 @@
 			}
 		});
 		validator2.init();
-
+		//форма question
 		const validator3 = new Validator({
 			selector: '#form3', // что валидируем
 			pattern: { 
-				// phone: /^\d+$/,
-				// email: /.+@.+\..+/i,
-				// zip: /^\d{6}/
 				youName: /^[А-ЯЁа-яё]*$/,
 				youMessage: /^[А-ЯЁа-яё]*$/,
-				// message: 
 			},
 			method: {
 				'form3-phone':[ 

@@ -1,17 +1,17 @@
 
-console.log('таймер');
+console.log('GLO3D');
 window.addEventListener('DOMContentLoaded', function(){
     'use strict';
+    // функция отображения чисел дя таймера 00:00:00
     function addNull(num) {
         num = ''+num;   
         return (num.length === 1)? num = '0' + num : num = num;        
     }
 
-    // функцию день дней дня
+    // функцию склонения (день дней дня)
     const declOfNum = (number, titles) => addNull(number) + ' ' + titles[(number % 100 > 4 && number % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(number % 10 < 5) ? number % 10 : 5]];
     
     // таймер
-
     function countTimer(deadLine) {
         let timerHours = document.querySelector('#timer-hours'),
             timerDay = document.querySelector('#timer-days'),
@@ -80,9 +80,7 @@ window.addEventListener('DOMContentLoaded', function(){
     }
     countTimer('8 mart 2020 12:15');
 
-
     // меню
-
     const toggleMenu = () =>{
 
         const btnMenu = document.querySelector('.menu'),
@@ -93,9 +91,7 @@ window.addEventListener('DOMContentLoaded', function(){
         document.addEventListener('click',(event)=>{
 
             let target = event.target;
-            // console.log(target);
-            // console.log('target: ', menu.classList.contains('active-menu'));
-           
+        
             if (target.closest('.menu')) {
                 menu.classList.toggle ('active-menu');
                 return;
@@ -108,8 +104,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 // console.log('target', target);
 
                 menu.classList.remove ('active-menu');
-            }
-         
+            }         
             if (target.tagName.toUpperCase() ==='A'&& !target.closest('.close-btn') && !target.closest('.portfolio-btn')) {
                 slowScroll(event);//portfolio-btn
             } 
@@ -119,44 +114,26 @@ window.addEventListener('DOMContentLoaded', function(){
       
         // плавный скроллинг
         const slowScroll = (event) => {
-            // console.log('event: ', event);
             menu.classList.remove ('active-menu');
-
             let tagTarget = event.target.hash.substr(1),
-                divTargetY = document.querySelector('.'+tagTarget).offsetTop,
-            
-                moveToElement;
-                
-                event.target.href = '#';
-              
+                divTargetY = document.querySelector('.'+tagTarget).offsetTop,        
+                moveToElement;                
+                event.target.href = '#';              
                 let scrollItem = () => {
                     if (window.pageYOffset <= divTargetY) {
                         moveToElement = requestAnimationFrame(scrollItem);
                         this.scrollBy(0, 80);
                     } else {
                         cancelAnimationFrame(moveToElement);
-                    }
-                     
+                    }                     
                 }
                   scrollItem();
-
         };
-            // событие на меню
-            // btnMenu.addEventListener('click',handlerMenu); 
-                    
-            // крестик в меню        
-            // closeBtn.addEventListener('click',handlerMenu);
-                
-            // навешиваем событие на каждый элемент меню    
-            // menuItems.forEach((element) => element.addEventListener('click',handlerMenu)); 
-            // menuItems.forEach((element) => element.addEventListener('click',slowScroll)); 
-           
-    }
-
+       
+    };
     toggleMenu();
 
     //popup
-
     const toglePopup = () =>{
         const popUp = document.querySelector('.popup'),
               popupBtn = document.querySelectorAll('.popup-btn'),
@@ -222,13 +199,11 @@ window.addEventListener('DOMContentLoaded', function(){
         document.addEventListener('click', (event) => {
             let target = event.target;
             if (target.closest('.popup-btn')) {
-                console.log('***',target);
                 showPopup();
             }
             if (target.closest('.popup-close')) {
                 closePopup();
             }
-
             if (!target.closest('.popup-content') && !target.closest('.form-btn')) {
                 closePopupBg();
             }
@@ -239,7 +214,6 @@ window.addEventListener('DOMContentLoaded', function(){
     toglePopup();
 
     //прокрутка до услуг
-
     const slowScroll = () =>{
         const imgBtn = document.querySelector('main>a'),
               targetAncor = document.querySelector('.service-block'),
@@ -266,7 +240,6 @@ window.addEventListener('DOMContentLoaded', function(){
     slowScroll();
 
     //табы наши услуги
-
     const tabs = () => {
         const tabHeader = document.querySelector('.service-header'),
               tab = document.querySelectorAll('.service-header-tab'),
@@ -459,6 +432,7 @@ window.addEventListener('DOMContentLoaded', function(){
         startSlide();
     };
     slider();
+
     // команда изменение фоток при наведении мышкой
     const command = () =>{
 
@@ -607,7 +581,7 @@ window.addEventListener('DOMContentLoaded', function(){
         })
     }; calculate( 100 );
 
-    //маска для ввода
+    //маска для ввода телефона
     const maskInput = () => {
         maskPhone('#form1-phone');
         maskPhone('#form2-phone');
@@ -616,45 +590,18 @@ window.addEventListener('DOMContentLoaded', function(){
     maskInput();
 
     //send-ajax-form
-
     const sendForm = () =>{
         const errorMessage = 'Что то пошло не так',
-            loadMessage = 'Загрузка ...',
             successMessage = 'Ваша заявка получена';
             
-        const form = document.querySelector('#form1');
         const statusMessage = document.createElement('div');
         const imgLoader = document.createElement('img');
         statusMessage.style.cssText = 'font-size: 4rem;';
 
-        const loader = () =>{
-            const cubeLoader = document.createElement('div');
-            cubeLoader.id = 'cube-loader';
-            const caption = document.createElement('div');
-            caption.classList.add('caption');
-            cubeLoader.appendChild(caption);
-            const cubeLoaders = document.createElement('div');
-            cubeLoaders.classList.add('cube-loader');
-            caption.appendChild(cubeLoaders);
-        
-            for (let i = 1; i <= 4; i++) {
-                const loaderItem = document.createElement('div');
-                loaderItem.classList.add('cube');
-                loaderItem.classList.add('loader-'+i);
-                
-                cubeLoaders.appendChild(loaderItem);
-            }
-           console.log(cubeLoader);
-            form.appendChild(cubeLoader);
-        };loader();
-        
-
-        // form.addEventListener('submit',(event) => {
         document.addEventListener('submit',(event) => {
             event.preventDefault();
             const target = event.target;
           
-            // target.querySelector('.form-name').matches('.error')
             if (target.querySelector('#'+target.id+'-name').matches('.error') || 
                 target.querySelector('#'+target.id+'-email').matches('.error') ||
                 target.querySelector('#'+target.id+'-phone').matches('.error')) {
@@ -665,64 +612,56 @@ window.addEventListener('DOMContentLoaded', function(){
             }
             target.appendChild(statusMessage);
             statusMessage.appendChild(imgLoader).style.display = 'none';
-            // form.appendChild(statusMessage); //target
 
-            const request = new XMLHttpRequest();
-            // навешиваем слушателя сразу после создания request  что бы отслеживать все события
-            request.addEventListener('readystatechange', () => {
+            //promise
+            const getData = () =>{
+                return new Promise(( resolve, reject ) => {
+
+                    const request = new XMLHttpRequest();
+                    // навешиваем слушателя сразу после создания request  что бы отслеживать все события
+                    request.addEventListener('readystatechange', () => {
+                        
+                        if (request.readyState !==4) {
+                            imgLoader.style.display = 'inline-block';
+                            imgLoader.src = "./images/1.gif";
+                            return;
+                        }     
+        
+                        if (request.status === 200 ) {
+                            imgLoader.style.display = 'none';
+                            statusMessage.textContent = successMessage;
+                            target.querySelector('#'+target.id+'-name').value = '';
+                            target.querySelector('#'+target.id+'-email').value = '';
+                            target.querySelector('#'+target.id+'-phone').value = '';
+                            (target.querySelector('#'+target.id+'-message')) ? target.querySelector('#'+target.id+'-message').value = '': null;
+                            
+                        } else {
+                            reject(errorMessage);
+                            // successMessage.textContent = errorMessage;
+                        }
+                    });
+                    request.open('POST', './server.php');
+                    request.setRequestHeader('Content-Type', 'aplication/json'); //JSON
+        
+                    const formData = new FormData(target);
+                    let body = {};
                 
-                // statusMessage.textContent = loadMessage;
-                if (request.readyState !==4) {
-                    imgLoader.style.display = 'inline-block';
-                    imgLoader.src = "./images/1.gif";
-                }
-                
-                if ( request.readyState !== 4){
-                    return;
-                }        
+                    formData.forEach((val, key) =>{
+                        body[key] = val;
+                    });
+                    request.send(JSON.stringify(body)); //JSON
+                    resolve(JSON.stringify(body));
 
-                if (request.status === 200 ) {
-                    imgLoader.style.display = 'none';
-
-                    statusMessage.textContent = successMessage;
-                    target.querySelector('#'+target.id+'-name').value = '';
-                    target.querySelector('#'+target.id+'-email').value = '';
-                    target.querySelector('#'+target.id+'-phone').value = '';
-                    (target.querySelector('#'+target.id+'-message')) ? target.querySelector('#'+target.id+'-message').value = '': null;
                     
-                } else {
-                    successMessage.textContent = errorMessage;
-                }
-
-            });
-
-
-            request.open('POST', './server.php');
-            request.setRequestHeader('Content-Type', 'aplication/json'); //JSON
-            // request.setRequestHeader('Content-Type', 'multipart/form-data'); // если отправляем formData
-
-            const formData = new FormData(target);
-            // const formData = new FormData(form); //target
-            let body = {};
-            // for (const i of formData.entries()) {
-            //     body[i[0]] = i[1];
-            // }
-            formData.forEach((val, key) =>{
-                body[key] = val;
-            });
-            console.log('JSON.stringify(body);: ', JSON.stringify(body)); 
-            console.log(body);
-            // request.send(formData); // если отправляем formData
-            request.send(JSON.stringify(body)); //JSON
+                });
+            };
+            getData()
+            .then(json => console.log(json))
+            .catch(errorMessage => successMessage.textContent = errorMessage);
            
-
-            
-
-
         });
-
     };
-    sendForm();
-
+    sendForm()
+    
 });
 

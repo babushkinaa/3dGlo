@@ -2,6 +2,7 @@
 console.log('GLO3D');
 window.addEventListener('DOMContentLoaded', function(){
     'use strict';
+
     // функция отображения чисел дя таймера 00:00:00
     function addNull(num) {
         num = ''+num;   
@@ -110,21 +111,20 @@ window.addEventListener('DOMContentLoaded', function(){
                 divTargetY = document.querySelector('.'+tagTarget).offsetTop,        
                 moveToElement;                
                 event.target.href = '#';              
-                let scrollItem = () => {
-                    if (window.pageYOffset <= divTargetY) {
-                        moveToElement = requestAnimationFrame(scrollItem);
-                        this.scrollBy(0, 80);
-                    } else {
-                        cancelAnimationFrame(moveToElement);
-                    }                     
-                }
-                  scrollItem();
-        };
-       
+            let scrollItem = () => {
+                if (window.pageYOffset <= divTargetY) {
+                    moveToElement = requestAnimationFrame(scrollItem);
+                    this.scrollBy(0, 80);
+                } else {
+                    cancelAnimationFrame(moveToElement);
+                }                     
+            }
+            scrollItem();
+        };       
     };
     toggleMenu();
 
-    //popup
+    // popup
     const toglePopup = () =>{
         const popUp = document.querySelector('.popup');
 
@@ -150,7 +150,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 setOpacity();
            }
         };
-
+        // закрываем по крестику
         const closePopup = () => {
             let op = 1, opacity;
             const setOpacity = () => {
@@ -167,7 +167,7 @@ window.addEventListener('DOMContentLoaded', function(){
             }
             setOpacity();
         };
-
+        // закрываем если нажали нафон
         const closePopupBg = () => {
             let op = 1, opacity;
             const setOpacity = () => {
@@ -223,7 +223,6 @@ window.addEventListener('DOMContentLoaded', function(){
                 }
               };
               imgBtn.addEventListener('click', scrollItem);
-
     };
     slowScroll();
 
@@ -237,7 +236,6 @@ window.addEventListener('DOMContentLoaded', function(){
         const toggleTabContent = (index) => {
             tabContent.forEach((element, i) => {
                 if(index === i){
-                    // console.log(element);
                     element.classList.remove('d-none');
                     tab[i].classList.add('active');
                     tabContent.forEach(item => {
@@ -265,16 +263,16 @@ window.addEventListener('DOMContentLoaded', function(){
             });
         };     
 
-              tabHeader.addEventListener('click',(event) =>{
-                  let target = event.target; // присвоим событие прилетевшее в обработчик переменной target
-                      target = target.closest('.service-header-tab');  // переопределим target если у элемента нет класса service-header-tab
+        tabHeader.addEventListener('click',(event) =>{
+            let target = event.target; // присвоим событие прилетевшее в обработчик переменной target
+                target = target.closest('.service-header-tab');  // переопределим target если у элемента нет класса service-header-tab
                                                                        // проверяем у родителя класс 
-                      tab.forEach((item,i) => {
-                          if(item === target){
-                            toggleTabContent(i);                            
-                          }
-                      });                  
-              });
+                tab.forEach((item,i) => {
+                    if(item === target){
+                        toggleTabContent(i);                            
+                    }
+                });                  
+        });
     };
     tabs();
     
@@ -294,6 +292,7 @@ window.addEventListener('DOMContentLoaded', function(){
         const prevSlide = (element, index, removeClass) => { // element - элемент, index - индекс, addClass - удаляемый класс
             element[index].classList.remove(removeClass);//добавить эфект
         };
+
         // удаляем класс у текущего
         const nextSlide = (element, index, addClass) => { // element - элемент, index - индекс, addClass - добавляемый класс
             element[index].classList.add(addClass); //добавить эфект
@@ -310,6 +309,7 @@ window.addEventListener('DOMContentLoaded', function(){
              nextSlide( slide, currentSlide, 'portfolio-item-active');
              nextSlide( dot, currentSlide, 'dot-active');
         };
+
         // запуск слайдера
         const startSlide = ()=>{
             let startSliderItem = (time = 3000) =>{ //значение по умолчанию 3 сек (3000)
@@ -317,10 +317,12 @@ window.addEventListener('DOMContentLoaded', function(){
             };
             startSliderItem(); //скорость переключения слайдов
         };
+
         // остановка слайдера
         const stopSlide = ()=>{
                 clearInterval(interval);
-        };     
+        };  
+
         // обработчик нажатия на кнопки и точки слайдера
         slider.addEventListener('click',()=>{
             event.preventDefault();
@@ -331,7 +333,6 @@ window.addEventListener('DOMContentLoaded', function(){
             }
             prevSlide( slide, currentSlide, 'portfolio-item-active');
             prevSlide( dot, currentSlide, 'dot-active');
-
             if (target.matches('#arrow-right')) { // если в таргете есть id #arrow-ride
                 currentSlide++;
             }else if (target.matches('#arrow-left')) {
@@ -351,34 +352,29 @@ window.addEventListener('DOMContentLoaded', function(){
             if (currentSlide < 0 ) {
                 currentSlide = slide.length -1;
             }
-
             nextSlide( slide, currentSlide, 'portfolio-item-active');
             nextSlide( dot, currentSlide, 'dot-active');
-
         });
+
         // остановка слайдера при наведении мышкой на кнопки или точки
         slider.addEventListener('mouseover',(event)=>{ // не нужно использовать mouseenter
             let target = event.target;
-
             if (target.matches('.portfolio-btn') || target.matches('.dot')) { // если мышь прибежала на эти элементы
                 stopSlide();
-            }
-            
+            }            
         });
+
         // запуск слайдера если мышь убежала
         slider.addEventListener('mouseout',(event) => { // не нужно использовать mouseleave
             let target = event.target;
-
             if (target.matches('.portfolio-btn') || target.matches('.dot')) { // если мышь убежала с этих элементов
                 startSlide();
             }
-
         });
 
         // количество точек и добавление в слайдер
         const enterDotScrean = () => {
             let elementLi;
-
                 slide.forEach((element,i) => {
                     if (i>0) {
                         elementLi = document.createElement('li');
@@ -396,14 +392,12 @@ window.addEventListener('DOMContentLoaded', function(){
 
         };
         enterDotScrean();
-
         startSlide();
     };
     slider();
 
     // команда изменение фоток при наведении мышкой
     const command = () =>{
-
         const changeData = (event) =>{
             const eventAttribut = "data-img";
             const imgSrc = event.getAttribute('src');
@@ -425,6 +419,7 @@ window.addEventListener('DOMContentLoaded', function(){
             setOpacity();
             event.setAttribute(eventAttribut, imgSrc);
         };
+
         const reverseData = (event) =>{
             const eventAttribut = "data-img";
             const imgSrc = event.getAttribute('src');
@@ -526,7 +521,6 @@ window.addEventListener('DOMContentLoaded', function(){
 
         });
 
-
         document.addEventListener('input', event => {
             let target = event.target;
             if (target === calcType || target === calcSquare || target === calcDay || target === calcCount) {
@@ -546,73 +540,67 @@ window.addEventListener('DOMContentLoaded', function(){
     //send-ajax-form
     const sendForm = () =>{
         const errorMessage = 'Что то пошло не так',
-            successMessage = 'Ваша заявка получена';
-            
-        const statusMessage = document.createElement('div');
-        const imgLoader = document.createElement('img');
+            successMessage = 'Ваша заявка получена',
+            statusMessage = document.createElement('div'),
+            imgLoader = document.createElement('img'),
+            url = './server.php';
+        let body = {};               
+
+
         statusMessage.style.cssText = 'font-size: 4rem;';
+
+         // очищаем поля
+         const resetValue = (target) =>{
+            target.querySelector('#'+target.id+'-name').value = '';
+            target.querySelector('#'+target.id+'-email').value = '';
+            target.querySelector('#'+target.id+'-phone').value = '';
+            (target.querySelector('#'+target.id+'-message')) ? 
+            target.querySelector('#'+target.id+'-message').value = '': null;
+        };
+        // отображаем loader
+        const showLoader =  () => {
+            imgLoader.style.display = 'inline-block';
+            imgLoader.src = "./images/1.gif";
+        };
 
         document.addEventListener('submit',(event) => {
             event.preventDefault();
-            const target = event.target;
-          
+            const target = event.target;          
             if (target.querySelector('#'+target.id+'-name').matches('.error') || 
                 target.querySelector('#'+target.id+'-email').matches('.error') ||
-                target.querySelector('#'+target.id+'-phone').matches('.error')) {
+                target.querySelector('#'+target.id+'-phone').matches('.error') ||
+                target.querySelector('#'+target.id+'-message') && target.querySelector('#'+target.id+'-message').matches('.error')) {
                 return;
-            }
-            if (target.querySelector('#'+target.id+'-message') && target.querySelector('#'+target.id+'-message').matches('.error')) {
-                return
             }
             target.appendChild(statusMessage);
             statusMessage.appendChild(imgLoader).style.display = 'none';
 
-            //promise
-            const getData = () =>{
-                return new Promise(( resolve, reject ) => {
-
-                    const request = new XMLHttpRequest();
-                    // навешиваем слушателя сразу после создания request  что бы отслеживать все события
-                    request.addEventListener('readystatechange', () => {
-                        
-                        if (request.readyState !==4) {
-                            imgLoader.style.display = 'inline-block';
-                            imgLoader.src = "./images/1.gif";
-                            return;
-                        }     
-        
-                        if (request.status === 200 ) {
-                            imgLoader.style.display = 'none';
-                            statusMessage.textContent = successMessage;
-                            target.querySelector('#'+target.id+'-name').value = '';
-                            target.querySelector('#'+target.id+'-email').value = '';
-                            target.querySelector('#'+target.id+'-phone').value = '';
-                            (target.querySelector('#'+target.id+'-message')) ? target.querySelector('#'+target.id+'-message').value = '': null;
-                            
-                        } else {
-                            reject(errorMessage);
-                            // successMessage.textContent = errorMessage;
-                        }
-                    });
-                    request.open('POST', './server.php');
-                    request.setRequestHeader('Content-Type', 'aplication/json'); //JSON
-        
-                    const formData = new FormData(target);
-                    let body = {};
-                
-                    formData.forEach((val, key) =>{
+            const formData = new FormData(target);
+                    formData.forEach((val, key) => {
                         body[key] = val;
                     });
-                    request.send(JSON.stringify(body)); //JSON
-                    resolve(JSON.stringify(body));
-
-                    
+            showLoader();
+            const postData = (body) => {
+                return fetch(url,{
+                    method: 'POST',
+                    headers: {'Content-Type': 'aplication/json'},
+                    body : JSON.stringify(body)
                 });
             };
-            getData()
-            .then(json => console.log(json))
-            .catch(errorMessage => successMessage.textContent = errorMessage);
-           
+
+            postData(body)
+               
+                .then( response => {
+                    if (response.ok) {
+                        imgLoader.style.display = 'none';
+                        statusMessage.textContent = successMessage;
+                        resetValue(target);
+                    } else {
+                        throw new Error(response.textContent);
+                    }
+                })
+                .catch( error => statusMessage.textContent = errorMessage);
+
         });
     };
     sendForm()

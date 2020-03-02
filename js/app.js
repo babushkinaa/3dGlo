@@ -19,8 +19,6 @@ window.addEventListener('DOMContentLoaded', function(){
             timerMinutes = document.querySelector('#timer-minutes'),
             timerSeconds = document.querySelector('#timer-seconds');
 
-        
-
             function getTimeRemaining() {
             let dateStop = new Date(deadLine).getTime(),
                 dateNow = new Date().getTime(),
@@ -68,15 +66,10 @@ window.addEventListener('DOMContentLoaded', function(){
                     timerMinutes.textContent = declOfNum(timer.minutes,[' м',' м',' м']);
                 (timer.seconds !== 0) ? timerSeconds.textContent = addNull(timer.seconds) : 
                 timerSeconds.textContent = addNull(timer.seconds);
-                // timerSeconds.textContent = declOfNum(timer.seconds,['секунад','секунды','секунд']);
-
-              
             }
             let setTimer = setInterval(() => {
                 updateClock();
-            }, 1000);
-           
-           
+            }, 1000);          
     }
     countTimer('8 mart 2020 12:15');
 
@@ -101,8 +94,6 @@ window.addEventListener('DOMContentLoaded', function(){
 
             }
             if (!target.closest('.active-menu')) {
-                // console.log('target', target);
-
                 menu.classList.remove ('active-menu');
             }         
             if (target.tagName.toUpperCase() ==='A'&& !target.closest('.close-btn') && !target.closest('.portfolio-btn')) {
@@ -135,9 +126,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
     //popup
     const toglePopup = () =>{
-        const popUp = document.querySelector('.popup'),
-              popupBtn = document.querySelectorAll('.popup-btn'),
-              popupClose = document.querySelector('.popup-close');
+        const popUp = document.querySelector('.popup');
 
         // открываем popup
         const showPopup = () => {
@@ -224,7 +213,6 @@ window.addEventListener('DOMContentLoaded', function(){
             moveToElement;
           
               let scrollItem = () => {
-                // event.preventDefault();
                 if (window.pageYOffset < targetY) {
                     moveToElement = requestAnimationFrame(scrollItem);
 
@@ -244,7 +232,6 @@ window.addEventListener('DOMContentLoaded', function(){
         const tabHeader = document.querySelector('.service-header'),
               tab = document.querySelectorAll('.service-header-tab'),
               tabContent = document.querySelectorAll('.service-tab');
-  
 
         // добавляем класс bootstrap  d-none (display-none)      
         const toggleTabContent = (index) => {
@@ -270,9 +257,7 @@ window.addEventListener('DOMContentLoaded', function(){
                             }
                             setOpacity();
                         }
-                    });
-                    
-                    
+                    });                    
                 } else {
                     element.classList.add('d-none');
                     tab[i].classList.remove('active');
@@ -286,13 +271,10 @@ window.addEventListener('DOMContentLoaded', function(){
                                                                        // проверяем у родителя класс 
                       tab.forEach((item,i) => {
                           if(item === target){
-                            toggleTabContent(i);
-                            
+                            toggleTabContent(i);                            
                           }
-                      });
-                  
+                      });                  
               });
-
     };
     tabs();
     
@@ -302,13 +284,9 @@ window.addEventListener('DOMContentLoaded', function(){
               btn = document.querySelectorAll('.portfolio-btn'),
               parrentDot = document.querySelector('.portfolio-dots'),
               slider = document.querySelector('.portfolio-content');
-        let   dot = document.querySelectorAll('.dot');
-
-
-        // console.log(slide, btn, dot, slider,parrentDot);
-
-        let currentSlide = 0, // первый слайд
-            interval; //переменная для остановки счетчика
+        let   dot = document.querySelectorAll('.dot'),
+              currentSlide = 0, // первый слайд
+              interval; //переменная для остановки счетчика
 
         // СМЕНА КЛАССОВ СЛАЙДЕРА
 
@@ -325,16 +303,12 @@ window.addEventListener('DOMContentLoaded', function(){
         const autoPlaySlide = ()=>{
             prevSlide( slide, currentSlide, 'portfolio-item-active');
             prevSlide( dot, currentSlide, 'dot-active');
-            //  slide[currentSlide].classList.remove('portfolio-item-active');
              currentSlide++;
              if (currentSlide >= slide.length) {
                  currentSlide = 0;
              }
              nextSlide( slide, currentSlide, 'portfolio-item-active');
              nextSlide( dot, currentSlide, 'dot-active');
-
-            //  slide[currentSlide].classList.add('portfolio-item-active');
-
         };
         // запуск слайдера
         const startSlide = ()=>{
@@ -346,19 +320,15 @@ window.addEventListener('DOMContentLoaded', function(){
         // остановка слайдера
         const stopSlide = ()=>{
                 clearInterval(interval);
-        };
-        
-      
+        };     
         // обработчик нажатия на кнопки и точки слайдера
         slider.addEventListener('click',()=>{
             event.preventDefault();
             let target = event.target;
             // условия вызова обработчика 
             if (!target.matches('.portfolio-btn', '.dot')) { // если в таргет отсутствуют селекторы то ничего не делаем
-                // if (!target.matches('#arrow-right','#arrow-left','.dot')) { // если в таргет отсутствуют селекторы то ничего не делаем
                 return;            
             }
-
             prevSlide( slide, currentSlide, 'portfolio-item-active');
             prevSlide( dot, currentSlide, 'dot-active');
 
@@ -420,8 +390,6 @@ window.addEventListener('DOMContentLoaded', function(){
                         elementLi.classList.add('dot-active'); 
                         parrentDot.appendChild(elementLi);
                     }
-                    
-                    // console.log(i);
                 });
                 dot = document.querySelectorAll('.dot');
 
@@ -456,12 +424,6 @@ window.addEventListener('DOMContentLoaded', function(){
             }
             setOpacity();
             event.setAttribute(eventAttribut, imgSrc);
-
-
-            // const eventAttribut = "data-img";
-            // const imgSrc = event.getAttribute('src');
-            // event.hasAttribute(eventAttribut) ? event.src = event.dataset.img : 'null'; 
-            // event.setAttribute(eventAttribut, imgSrc);
         };
         const reverseData = (event) =>{
             const eventAttribut = "data-img";
@@ -482,12 +444,6 @@ window.addEventListener('DOMContentLoaded', function(){
             }
             setOpacity();
             event.setAttribute(eventAttribut, imgSrc);
-
-
-            // const eventAttribut = "data-img";
-            // const imgSrc = event.getAttribute('src');
-            // event.hasAttribute(eventAttribut) ? event.src = event.dataset.img : 'null';
-            // event.setAttribute(eventAttribut, imgSrc);
         };
 
         document.addEventListener('mouseover', event => {
@@ -531,7 +487,6 @@ window.addEventListener('DOMContentLoaded', function(){
                             }
                     }
                     setOpacity();
-            // totalValue.textContent = totalCalc;
         };    
 
         const coutnSum = ( price ) =>{
@@ -574,7 +529,6 @@ window.addEventListener('DOMContentLoaded', function(){
 
         document.addEventListener('input', event => {
             let target = event.target;
-            // if (target.matches('input')) {
             if (target === calcType || target === calcSquare || target === calcDay || target === calcCount) {
                 target.value = target.value.replace(/[^0-9]/,'');
             }

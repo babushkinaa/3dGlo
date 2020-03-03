@@ -1,0 +1,4 @@
+// конфигурационный файл для babel
+{
+    "presets": ["@babel/preset-env"]
+}

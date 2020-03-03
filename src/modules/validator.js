@@ -1,4 +1,4 @@
-class Validator{
+export default class Validator{
     // конструктор
     constructor({selector, pattern ={}, method}){
         this.form = document.querySelector( selector ); // наша форма id class ...

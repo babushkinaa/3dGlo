@@ -1,4 +1,4 @@
-function maskPhone(selector, masked = '+7 (___) ___-__-__') {
+export default function maskPhone(selector, masked = '+7 (___) ___-__-__') {
 	const elem = document.querySelector(selector);
 
 	function mask(event) {
@@ -6,7 +6,6 @@ function maskPhone(selector, masked = '+7 (___) ___-__-__') {
 		const template = masked,
 			def = template.replace(/\D/g, ""),
 			val = this.value.replace(/\D/g, "");
-		console.log(template);
 		let i = 0,
 			newValue = template.replace(/[_\d]/g, function (a) {
 				return i < val.length ? val.charAt(i++) || def.charAt(i) : a;
@@ -33,3 +32,4 @@ function maskPhone(selector, masked = '+7 (___) ___-__-__') {
 	elem.addEventListener("focus", mask);
 	elem.addEventListener("blur", mask);
 }
+// export default {maskPhone}; 

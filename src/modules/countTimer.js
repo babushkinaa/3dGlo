@@ -7,7 +7,8 @@ function addNull(num) {
 // функцию склонения (день дней дня)
 const declOfNum = (number, titles) => addNull(number) + ' ' + titles[(number % 100 > 4 && number % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(number % 10 < 5) ? number % 10 : 5]];
 
-function countTimer(deadLine) {
+const countTimer = (deadLine) => {
+// function countTimer(deadLine) {
     let timerHours = document.querySelector('#timer-hours'),
         timerDay = document.querySelector('#timer-days'),
         timerDaySite = document.querySelector('#timer-day-site'),
@@ -22,7 +23,7 @@ function countTimer(deadLine) {
             minutes = Math.floor((timeRemaining / 60)%60),
             hours = Math.floor((timeRemaining / 60 )/ 60),
             day = Math.floor(timeRemaining / 60 / 60 / 24);
-
+            console.log(dateStop);
             if (timeRemaining <= 0){
                 stopTimer();
                 addTimeRemaining();
@@ -39,7 +40,6 @@ function countTimer(deadLine) {
         }
         // добавим еще 24 часа на акцию
         let addTimeRemaining = () =>{
-            let addDays = 1;
             let date = new Date()
             date.setHours(date.getHours() + (24 - date.getHours()));
             date.setMinutes('00');
@@ -52,6 +52,7 @@ function countTimer(deadLine) {
 
         function updateClock() {
             let timer = getTimeRemaining();
+           
             
             (timer.day !== 0)? timerDay.textContent = declOfNum(timer.day,['день','дня','дней']):
             timerDay.style.display = 'none';
@@ -61,6 +62,7 @@ function countTimer(deadLine) {
                 timerMinutes.textContent = declOfNum(timer.minutes,[' м',' м',' м']);
             (timer.seconds !== 0) ? timerSeconds.textContent = addNull(timer.seconds) : 
             timerSeconds.textContent = addNull(timer.seconds);
+            
         }
         let setTimer = setInterval(() => {
             updateClock();

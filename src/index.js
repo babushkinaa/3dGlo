@@ -22,7 +22,7 @@ import Validator from './modules/validator';
 
 
 // таймер
-countTimer('8 mart 2020 12:15');
+countTimer('5 jun 2020 12:15');
 // меню
 toggleMenu();
 // popup

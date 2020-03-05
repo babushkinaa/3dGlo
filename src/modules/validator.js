@@ -1,3 +1,5 @@
+'use strict';
+
 export default class Validator{
     // конструктор
     constructor({selector, pattern ={}, method}){

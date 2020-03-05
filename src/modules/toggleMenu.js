@@ -1,3 +1,5 @@
+'use strict';
+
 const toggleMenu = () =>{
 
     const btnMenu = document.querySelector('.menu'),
@@ -35,9 +37,15 @@ const toggleMenu = () =>{
             moveToElement;                
             event.target.href = '#';              
         let scrollItem = () => {
-            if (window.pageYOffset <= divTargetY) {
+            if ( window.pageYOffset <= divTargetY ) {
+               
                 moveToElement = requestAnimationFrame(scrollItem);
                 scrollBy(0, 80);
+                if(window.scrollY+1 >= document.documentElement.scrollHeight-document.documentElement.clientHeight) {
+                    cancelAnimationFrame(moveToElement);
+                    return
+                };
+
             } else {
                 cancelAnimationFrame(moveToElement);
             }                     

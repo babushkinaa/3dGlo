@@ -1,4 +1,6 @@
-// функция отображения чисел дя таймера 00:00:00
+'use strict';
+
+// функция отображения чисел для таймера 00:00:00
 function addNull(num) {
     num = ''+num;   
     return (num.length === 1)? num = '0' + num : num = num;        
@@ -8,7 +10,6 @@ function addNull(num) {
 const declOfNum = (number, titles) => addNull(number) + ' ' + titles[(number % 100 > 4 && number % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(number % 10 < 5) ? number % 10 : 5]];
 
 const countTimer = (deadLine) => {
-// function countTimer(deadLine) {
     let timerHours = document.querySelector('#timer-hours'),
         timerDay = document.querySelector('#timer-days'),
         timerDaySite = document.querySelector('#timer-day-site'),
@@ -23,7 +24,6 @@ const countTimer = (deadLine) => {
             minutes = Math.floor((timeRemaining / 60)%60),
             hours = Math.floor((timeRemaining / 60 )/ 60),
             day = Math.floor(timeRemaining / 60 / 60 / 24);
-            console.log(dateStop);
             if (timeRemaining <= 0){
                 stopTimer();
                 addTimeRemaining();

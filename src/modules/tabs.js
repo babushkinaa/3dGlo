@@ -1,3 +1,5 @@
+'use strict';
+
 const tabs = () => {
     const tabHeader = document.querySelector('.service-header'),
           tab = document.querySelectorAll('.service-header-tab'),

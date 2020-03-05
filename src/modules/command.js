@@ -1,3 +1,5 @@
+'use strict';
+
 const command = () =>{
     const changeData = (event) =>{
         const eventAttribut = "data-img";

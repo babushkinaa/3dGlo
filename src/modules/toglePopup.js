@@ -1,3 +1,5 @@
+'use strict';
+
 const toglePopup = () =>{
     const popUp = document.querySelector('.popup');
 

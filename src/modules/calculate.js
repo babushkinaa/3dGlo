@@ -1,3 +1,5 @@
+'use strict';
+
 const calculate = ( price = 100 ) => {
     const calcBlock =  document.querySelector('.calc-block'), // общий блок калькулятора
         calcType = document.querySelector('.calc-type'), // тип помещения
@@ -9,7 +11,7 @@ const calculate = ( price = 100 ) => {
     // доп задание    
     const showPrice = (totalCalc) => {
 
-        let op = 0, total = 0;
+        let op = 0;
                 const setOpacity = () => {
                     let opacity;
                         if( op < totalCalc ) {

@@ -1,3 +1,5 @@
+'use strict';
+
 export default function maskPhone(selector, masked = '+7 (___) ___-__-__') {
 	const elem = document.querySelector(selector);
 

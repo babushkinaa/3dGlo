@@ -7,15 +7,18 @@ const calculate = ( price = 100 ) => {
         calcDay = document.querySelector('.calc-day'), // количество дней
         calcCount = document.querySelector('.calc-count'), // количество помещений
         totalValue = document.querySelector('#total'); // результат
+        let opacity = undefined;
+
 
     // доп задание    
     const showPrice = (totalCalc) => {
-
+        cancelAnimationFrame(opacity);
         let op = 0;
+        totalValue.textContent = op;
                 const setOpacity = () => {
-                    let opacity;
+                    opacity = requestAnimationFrame(setOpacity);;
                         if( op < totalCalc ) {
-                            let opacity = requestAnimationFrame(setOpacity);
+                            // let opacity = requestAnimationFrame(setOpacity);
                             op +=50;
                             
                             totalValue.textContent = op;
